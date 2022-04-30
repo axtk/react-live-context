@@ -17,7 +17,7 @@ const toLiveValue = <T>(value: T): LiveValue<T> => (
         value
 ) as LiveValue<T>;
 
-export function createLiveContext<T>(defaultValue: T): LiveContext<T> {
+export function createLiveContext<T>(defaultValue?: T): LiveContext<T> {
     const context = createContext(toLiveValue(defaultValue));
     const ContextProvider = context.Provider;
 
