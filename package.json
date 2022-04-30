@@ -1,6 +1,6 @@
 {
   "name": "react-live-context",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "React Context with value mutation tracking",
   "main": "dist/index.js",
   "type": "module",
