@@ -1,13 +1,13 @@
 import { createContext, createElement, useContext, useState } from 'react';
 import { Observable } from 'object-observer';
 const isObject = (value) => value !== null && typeof value === 'object';
-const toLiveValue = (value) => isObject(value) && !Observable.isObservable(value) ?
+const toLiveValue = (value) => (isObject(value) && !Observable.isObservable(value) ?
     Observable.from(value, { async: true }) :
-    value;
+    value);
 export function createLiveContext(defaultValue) {
     const context = createContext(toLiveValue(defaultValue));
     const ContextProvider = context.Provider;
-    context.Provider = ({ value, ...otherProps }) => createElement(ContextProvider, { value: toLiveValue(value), ...otherProps });
+    context.Provider = Object.assign(({ value, ...otherProps }) => createElement(ContextProvider, { value: toLiveValue(value), ...otherProps }), ContextProvider);
     return context;
 }
 export function useLiveContext(context, observerOptions) {

@@ -11,17 +11,22 @@ export type LiveValue<T> = T extends object ?
 export type LiveContext<T> = Context<LiveValue<T>>;
 
 const isObject = (value: unknown) => value !== null && typeof value === 'object';
-const toLiveValue = (value: unknown) => isObject(value) && !Observable.isObservable(value) ?
-    Observable.from(value, {async: true}) :
-    value;
+const toLiveValue = <T>(value: T): LiveValue<T> => (
+    isObject(value) && !Observable.isObservable(value) ?
+        Observable.from(value, {async: true}) :
+        value
+) as LiveValue<T>;
 
 export function createLiveContext<T>(defaultValue: T): LiveContext<T> {
     const context = createContext(toLiveValue(defaultValue));
     const ContextProvider = context.Provider;
 
-    context.Provider = ({value, ...otherProps}: ProviderProps<LiveValue<T>>) => createElement(
+    context.Provider = Object.assign(
+        ({value, ...otherProps}: ProviderProps<LiveValue<T>>) => createElement(
+            ContextProvider,
+            {value: toLiveValue(value), ...otherProps},
+        ),
         ContextProvider,
-        {value: toLiveValue(value), ...otherProps},
     );
 
     return context;
