@@ -8,6 +8,8 @@ With `createLiveContext()` and `useLiveContext()`, an update in the context valu
 
 ## Example
 
+[[Demo](https://codepen.io/axtk/pen/RwQwRMq)]
+
 ```jsx
 import {useContext} from 'react';
 import {createLiveContext, useLiveContext} from 'react-live-context';
