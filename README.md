@@ -13,7 +13,7 @@ With `createLiveContext()` and `useLiveContext()`, an update in the context valu
 ```jsx
 import {useContext} from 'react';
 import {createLiveContext, useLiveContext} from 'react-live-context';
-import {createRoot} from 'react-dom';
+import {createRoot} from 'react-dom/client';
 
 // Replaced `createContext(defaultValue)`
 // with `createLiveContext(defaultValue)`.
