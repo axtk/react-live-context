@@ -15,7 +15,7 @@
   "keywords": [
     "react",
     "context",
-    "observable"
+    "live-context"
   ],
   "author": "axtk",
   "license": "ISC",
