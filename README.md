@@ -32,9 +32,9 @@ const Display = () => {
 
 const PlusButton = () => {
     // Since this component doesn't require a re-render when
-    // the context value changes, obtaining its value with
-    // `useContext` rather than `useLiveContext` will also work
-    // just fine. (This is also a way to communicate that this
+    // the context value changes, using the `useContext` hook
+    // rather than `useLiveContext` will also work just fine.
+    // (This is also a way to communicate that this
     // component doesn't track context value changes.)
     const data = useContext(CounterContext);
     return <button onClick={() => data.counter++}>+</button>;
