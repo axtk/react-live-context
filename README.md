@@ -31,8 +31,8 @@ const Display = () => {
 };
 
 const PlusButton = () => {
-    // Since the content of this particular component doesn't
-    // depend on the context value, obtaining its value with
+    // Since this component doesn't require a re-render when
+    // the context value changes, obtaining its value with
     // `useContext` rather than `useLiveContext` will also work
     // just fine. (This is also a way to communicate that this
     // component doesn't track context value changes.)
