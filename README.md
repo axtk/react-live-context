@@ -15,25 +15,27 @@ import {useContext} from 'react';
 import {createLiveContext, useLiveContext} from 'react-live-context';
 import {createRoot} from 'react-dom/client';
 
-// Replaced `createContext(defaultValue)`
+// Replacing `createContext(defaultValue)`
 // with `createLiveContext(defaultValue)`.
 const CounterContext = createLiveContext();
+// A value passed to `CounterContext` will be a 'live' object
+// capable of tracking its updates and notifying its subscribers.
 
 const Display = () => {
-    // The value of `CounterContext` is a 'live' object capable of
-    // tracking its updates and notifying other components using
-    // this value. The `useLiveContext` hook subscribes this
-    // component to changes in the context value.
+    // The `useLiveContext` hook subscribes this component to
+    // changes in the context value.
     const data = useLiveContext(CounterContext);
+    // Whenever the context value is updated, the component
+    // runs a re-render to update its content accordingly.
     return <span>{data.counter}</span>;
 };
 
 const PlusButton = () => {
-    // Since this particular component doesn't change when the
-    // context value changes, obtaining its value with `useContext`
-    // rather than `useLiveContext` will also work just fine.
-    // (This is a way to communicate that this component doesn't
-    // track context value changes.)
+    // Since the content of this particular component doesn't
+    // depend on the context value, obtaining its value with
+    // `useContext` rather than `useLiveContext` will also work
+    // just fine. (This is also a way to communicate that this
+    // component doesn't track context value changes.)
     const data = useContext(CounterContext);
     return <button onClick={() => data.counter++}>+</button>;
 };
