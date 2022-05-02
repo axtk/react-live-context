@@ -18,8 +18,9 @@ import {createRoot} from 'react-dom/client';
 // Replacing `createContext(defaultValue)`
 // with `createLiveContext(defaultValue)`.
 const CounterContext = createLiveContext();
-// A value passed to `CounterContext` will be a 'live' object
-// capable of tracking its updates and notifying its subscribers.
+// Live contexts accept values of all sorts the same way as
+// ordinary contexts do and convert them into 'live' values
+// capable of tracking their updates and notifying subscribers.
 
 const Display = () => {
     // The `useLiveContext` hook subscribes this component to
