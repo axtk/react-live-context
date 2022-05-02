@@ -30,6 +30,9 @@ const Display = () => {
     // the component runs a re-render to update its content
     // accordingly.
     return <span>{data.counter}</span>;
+    // The response to changes is asynchronous and occurs once
+    // per a set of sync value updates so as not to overwhelm
+    // components with redundant notifications.
 };
 
 const PlusButton = () => {
