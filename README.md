@@ -25,8 +25,10 @@ const Display = () => {
     // The `useLiveContext` hook subscribes this component to
     // changes in the context value.
     const data = useLiveContext(CounterContext);
-    // Whenever the context value is updated, the component
-    // runs a re-render to update its content accordingly.
+
+    // Whenever any part of the live context value is updated,
+    // the component runs a re-render to update its content
+    // accordingly.
     return <span>{data.counter}</span>;
 };
 
@@ -37,6 +39,11 @@ const PlusButton = () => {
     // (This is also a way to communicate that this
     // component doesn't track context value changes.)
     const data = useContext(CounterContext);
+
+    // Nested properties of a live context object value being
+    // mutated produce notifications for subscribed components
+    // to re-render (which is not the case with an object value
+    // from a context created via `createContext()`).
     return <button onClick={() => data.counter++}>+</button>;
 };
 
