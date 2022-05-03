@@ -2,9 +2,7 @@
 
 *React Context with value mutation tracking*
 
-React Context is the primary means to share data across components in a React app, but components will only respond to complete changes of its value, ignoring updates of nested properties. `createLiveContext()` and `useLiveContext()` are to address this issue and to streamline the shared data manipulation, with their APIs being fully compatible with the APIs of their native-React counterparts `createContext()` and `useContext()`.
-
-With `createLiveContext()` and `useLiveContext()`, an update in the context value properties will notify the components to re-render in order to adjust to the updated context value.
+With the live context, an update in a context's object value property will notify the subscribed components to re-render without the need to clone the entire object.
 
 ## Example
 
@@ -44,7 +42,7 @@ const PlusButton = () => {
     // component doesn't track context value changes.)
     const data = useContext(CounterContext);
 
-    // Nested properties of a live context object value being
+    // Nested properties of a live context's object value being
     // mutated produce notifications for subscribed components
     // to re-render (which is not the case with an object value
     // from a context created via `createContext()`).
