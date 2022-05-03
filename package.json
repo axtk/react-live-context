@@ -14,8 +14,9 @@
   },
   "keywords": [
     "react",
+    "react context",
     "context",
-    "live-context"
+    "live context"
   ],
   "author": "axtk",
   "license": "ISC",
