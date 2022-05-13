@@ -2,7 +2,7 @@
 
 *React Context with value mutation tracking*
 
-With the live context, an update in a context's object value property will notify the subscribed components to re-render without the need to clone the entire object.
+React Context is the primary means to share data across components in a React app, with components only responding to complete changes of a Context value, ignoring direct updates of nested properties and requiring extra manipulations to make them visible. `createLiveContext()` and `useLiveContext()` are to shortcut these manipulations and to streamline shared data management by notifying components of arbitrary Context value updates.
 
 ## Example
 
