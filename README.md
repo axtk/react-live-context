@@ -2,9 +2,11 @@
 
 *React Context with value mutation tracking*
 
-`useContext()` produces a re-render only if the entire Context object value has changed, which requires extra effort of mutating the object to convey a single nested property change;
+The React's built-in `useContext()` hook produces a re-render only if the entire Context object value has changed, which requires extra effort of mutating the object to convey a single nested property change.
 
-`useLiveContext()` acts much like `useContext()` and also produces a re-render if any property of the Context object value changes, allowing for more straightforward code.
+The `useLiveContext()` hook introduced by this package acts much like `useContext()` but also produces a re-render if any property of the Context object value changes, allowing for more straightforward code.
+
+(Instead of employing tools like *immer* to enable a mutable API on immutable objects in order to bypass the reference equality check in the `useContext()` hook and ultimately trigger a component re-render, this package offers a mutable API for the Context value itself capable of producing component re-renders in a direct fashion.)
 
 ## Example
 
