@@ -1,3 +1,5 @@
+[![npm](https://img.shields.io/npm/v/react-live-context?labelColor=royalblue&color=royalblue&style=flat-square)](https://www.npmjs.com/package/react-live-context)
+
 # react-live-context
 
 *React Context with value mutation tracking*
