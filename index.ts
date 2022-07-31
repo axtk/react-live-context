@@ -8,9 +8,11 @@ export type LiveValue<T> = T extends object ?
     Observable & T :
     T;
 
-export type LiveContext<T> = Context<LiveValue<T>>;
+export type LiveContext<T> = Context<LiveValue<T> | undefined>;
 
-const isObject = (value: unknown) => value !== null && typeof value === 'object';
+const isObject = <T = unknown>(value: T): value is NonNullable<T> =>
+    value !== null && typeof value === 'object';
+
 const toLiveValue = <T>(value: T): LiveValue<T> => (
     isObject(value) && !Observable.isObservable(value) ?
         Observable.from(value, {async: true}) :
@@ -22,7 +24,7 @@ export function createLiveContext<T>(defaultValue?: T): LiveContext<T> {
     const ContextProvider = context.Provider;
 
     context.Provider = Object.assign(
-        ({value, ...otherProps}: ProviderProps<LiveValue<T>>) => createElement(
+        ({value, ...otherProps}: ProviderProps<LiveValue<T> | undefined>) => createElement(
             ContextProvider,
             {value: toLiveValue(value), ...otherProps},
         ),
@@ -32,9 +34,12 @@ export function createLiveContext<T>(defaultValue?: T): LiveContext<T> {
     return context;
 }
 
-export function useLiveContext<T>(context: LiveContext<T>, observerOptions?: ObserverOptions | string): LiveValue<T> {
+export function useLiveContext<T>(
+    context: LiveContext<T>,
+    observerOptions?: ObserverOptions | string,
+): LiveValue<T> | undefined {
     const value = useContext(context);
-    const [revision, setRevision] = useState(0);
+    const [, setRevision] = useState(0);
 
     if (isObject(value)) {
         Observable.observe(value, () => {
